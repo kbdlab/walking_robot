@@ -1,10 +1,10 @@
-#wpa_supplicant.conf 설정 필수
+# wpa_supplicant.conf 설정 필수
 
 몇몇 분들에게 동영상 튜토리얼에 있는 wpa_supplicant.conf가 필요 없다고 말씀드렸는데, 꼭필요한 것으로 드러났습니다.
 잘못 말씀드려서 죄송합니다.
 안 하면 설치 시 설정한 WiFi외에 다른 WiFi에는 연결이 안 된다고 합니다.
 
-#apt upgrade 시 linux-firmware 문제
+# apt upgrade 시 linux-firmware 문제
 
 저희가 팀 뷰어를 깔려면
 `sudo apt update
