@@ -1,4 +1,4 @@
-# 연세대 WiFi 공식 매뉴얼(https://yis.yonsei.ac.kr/_res/ics/etc/Yonsei_Manual_KO.pdf)
+# [연세대 WiFi 공식 매뉴얼](https://yis.yonsei.ac.kr/_res/ics/etc/Yonsei_Manual_KO.pdf)
 
 # wpa_supplicant.conf 설정 필수
 
