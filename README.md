@@ -1,3 +1,5 @@
+# 연세대 WiFi 공식 매뉴얼(https://yis.yonsei.ac.kr/_res/ics/etc/Yonsei_Manual_KO.pdf)
+
 # wpa_supplicant.conf 설정 필수
 
 몇몇 분들에게 동영상 튜토리얼에 있는 wpa_supplicant.conf가 필요 없다고 말씀드렸는데, 꼭필요한 것으로 드러났습니다.
