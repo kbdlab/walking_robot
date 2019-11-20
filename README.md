@@ -30,5 +30,5 @@ upgrade는 꼭 필요하지는 않습니다.
 # pip 설치
 
 pip 는 파이썬 패키지 관리자로 필요한 패키지를 편리하게 설치/관리할 수 있게 해줍니다.
-'sudo apt-get install python-pip' 으로 설치 가능하며, 중간에 오류 발생 시 'sudo apt update' 를 한 번 해주시고 다시 설치를 진행하면 됩니다. 우분투 18.04 이후로는 picamera가 기본 패키지가 아니어서 pip으로 설치하신 후에 'pip install picamera'로 해주시고, 만약 권한 문제가 생기면 해당 코드에 '--user'를 붙이면 됩니다.
+`sudo apt-get install python-pip` 으로 설치 가능하며, 중간에 오류 발생 시 `sudo apt update` 를 한 번 해주시고 다시 설치를 진행하면 됩니다. 우분투 18.04 이후로는 picamera가 기본 패키지가 아니어서 pip으로 설치하신 후에 `pip install picamera`로 해주시고, 만약 권한 문제가 생기면 해당 코드에 `--user`를 붙이면 됩니다.
 
