@@ -25,7 +25,7 @@ upgrade는 꼭 필요하지는 않습니다.
 명령어를 사용하시면 됩니다.
 
 # 라즈베 파이에 opencv 설치하기
-'sudo apt-get install python-opencv' 
+`sudo apt-get install python-opencv` 
 
 # pip 설치
 
