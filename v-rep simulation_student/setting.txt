@@ -1,0 +1,9 @@
+[motor]
+motor_name 2 Micro metal motor 150:1 HPCB
+rpm 360
+torque 23.52
+motor_driver 1 L9110
+left 11 13
+right 16 18 
+perturbation 0.1 0.1
+echo 26
