@@ -24,7 +24,10 @@ upgrade는 꼭 필요하지는 않습니다.
 `sudo dpkg -i --force-all /var/cache/apt/archives/linux-firmware-raspi2_1.20190215-0ubuntu0.18.04.1_armhf.deb`
 명령어를 사용하시면 됩니다.
 
-# 라즈베 파이에 opencv 설치하기
+# 라즈베리 파이에 opencv 설치하기
+
+opencv는 numpy를 필요로하는 패키지이므로 자동으로 numpy도 같이 설치됩니다.
+
 `sudo apt-get install python-opencv` 
 
 # pip 설치
