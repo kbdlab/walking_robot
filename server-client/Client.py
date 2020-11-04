@@ -1,11 +1,15 @@
+PORT = 8000
+
 from http.client import HTTPConnection
 import json
 from time import sleep
 
+from Time import Time
+from sys import argv
 
 def main():
     while True:
-        conn = HTTPConnection('localhost:8000')
+        conn = HTTPConnection(f"{argv[1] or 'localhost'}:{PORT}")
 
         try:
             conn.request("GET", "/")
@@ -22,7 +26,7 @@ def main():
             if (not chunk): break
 
             chunk = chunk[:-1].decode()
-            print(json.loads(chunk))
+            print(Time(), json.loads(chunk))
 
 
 main()
