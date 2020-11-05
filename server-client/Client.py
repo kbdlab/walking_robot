@@ -19,9 +19,9 @@ def main():
             continue
 
         print('Connected')
-        r1 = conn.getresponse()
+        res = conn.getresponse()
         while True:
-            chunk = r1.readline()
+            chunk = res.readline()
             if (chunk == b'\n'): continue
             if (not chunk): break
 
