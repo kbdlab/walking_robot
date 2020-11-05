@@ -8,4 +8,5 @@ while :; do
     sleep 1s
     echo 0
     echo 0 > /sys/class/gpio/gpio11/value
+    sleep 1s
 done
