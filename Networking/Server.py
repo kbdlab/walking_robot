@@ -31,6 +31,13 @@ class Handler(BaseHTTPRequestHandler):
         self.finish()
         httpd.shutdown()
 
+    def do_POST(self):
+        self.send_response(204)
+        self.end_headers()
+        with open('steveholt-uploaded.jpg', 'wb') as File:
+            File.write(self.rfile.read())
+
+
 
 with socketserver.TCPServer(("0.0.0.0", PORT), Handler) as _httpd:
     httpd = _httpd
