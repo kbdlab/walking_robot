@@ -3,11 +3,19 @@ PORT = 8000
 from http.client import HTTPConnection
 import json
 from time import sleep
+import numpy as np
 
 from Time import Time
 from sys import argv
 
 print(argv)
+
+HALF=.5
+MOTOR_SPEEDS = {
+    "q": (HALF, 1), "w": (1, 1), "e": (1, HALF),
+    "a": (-1, 1), "s": (0, 0), "d": (1, -1),
+    "z": (-HALF, -1), "x": (-1, -1), "c": (1, HALF),
+}
 
 def main():
     while True:
@@ -28,7 +36,14 @@ def main():
             if (not chunk): break
 
             chunk = chunk[:-1].decode()
-            print(Time(), json.loads(chunk))
+            data = json.loads(chunk)
+            print(Time(), data)
+            action = data['action']
+            print('action', action)
+            try:
+                print(MOTOR_SPEEDS[action])
+            except KeyError as error:
+                print(error)
 
 
 main()
