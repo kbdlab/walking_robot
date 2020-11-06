@@ -7,9 +7,11 @@ from time import sleep
 from Time import Time
 from sys import argv
 
+print(argv)
+
 def main():
     while True:
-        conn = HTTPConnection(f"{argv[1] or 'localhost'}:{PORT}")
+        conn = HTTPConnection(f"{argv[1] if len(argv) > 1 else  'localhost'}:{PORT}")
 
         try:
             conn.request("GET", "/")
