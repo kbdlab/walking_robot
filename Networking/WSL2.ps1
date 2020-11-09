@@ -5,10 +5,9 @@
 $port=$args[0]
 echo $port
 
-$remoteport = wsl bash -c " ip addr show dev eth0 | grep 'inet '"
-$wsl = $remoteport -match '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}';
-echo $wsl
+$host = wsl bash -c " ip addr show dev eth0 | grep 'inet ' | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' | head -1"
+echo $host
 
-netsh interface portproxy add v4tov4 listenport=$port listenaddress=0.0.0.0 connectport=$port connectaddress=$wsl
+netsh interface portproxy add v4tov4 listenport=$port listenaddress=0.0.0.0 connectport=$port connectaddress=$host
 
 echo Success
