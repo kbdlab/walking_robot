@@ -25,7 +25,13 @@ $ports_a = $ports -join ",";
 
 
 #Remove Firewall Exception Rules
-iex "Remove-NetFireWallRule -DisplayName 'WSL 2 Firewall Unlock' ";
+try {
+    iex "Remove-NetFireWallRule -DisplayName 'WSL 2 Firewall Unlock' ";
+}
+catch {
+    echo 'Skipping Remove-NetFireWallRule'
+}
+
 
 #adding Exception Rules for inbound and outbound Rules
 iex "New-NetFireWallRule -DisplayName 'WSL 2 Firewall Unlock' -Direction Outbound -LocalPort $ports_a -Action Allow -Protocol TCP";
