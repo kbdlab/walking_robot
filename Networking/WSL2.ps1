@@ -1,4 +1,6 @@
-# Usage: powershell .\WLS2.ps1 <PORT>
+# Usage: In an admin powershell,
+# Set-ExecutionPolicy RemoteSigned
+# .\WLS2.ps1 <PORT>
 
 $port=$args[0]
 echo $port
