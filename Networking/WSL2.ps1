@@ -1,3 +1,5 @@
+# Usage: powershell .\WLS2.ps1 <PORT>
+
 $port=$args[0]
 echo $port
 
