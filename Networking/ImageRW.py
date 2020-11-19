@@ -1,6 +1,6 @@
 # https://www.mixedcontentexamples.com
 file = 'steveholt.jpg'
-host = 'localhost:8000'
+host = 'localhost:8001'
 
 from http.client import HTTPConnection
 import numpy as np
