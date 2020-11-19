@@ -35,7 +35,7 @@ def UploadNumpy():
     result, img = cv2.imencode('.jpg', img, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
     if not result:
         raise Exception('Image encode error')
-    Upload(img.tobytes())
+    Upload(img.tobytes(), {"X-Client2Server":"123"})
 
 
 if __name__ == '__main__':
