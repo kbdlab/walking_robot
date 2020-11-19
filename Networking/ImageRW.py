@@ -25,7 +25,7 @@ def DownloadAndUpload():
         Upload(File.read())
 
 def UploadNumpy():
-    img = np.random.random((100, 100,3))
+    img = 255 * np.random.random((100, 100,3))
     print('shape', img.shape)
     result, img = cv2.imencode('.jpg', img, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
     if not result:

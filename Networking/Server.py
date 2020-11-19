@@ -41,7 +41,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(204)
         self.end_headers()
         data = self.rfile.read()
-
+        
         if DISPLAY:
             data = np.asarray(bytearray(data), dtype="uint8")
             img = cv2.imdecode(data, cv2.IMREAD_ANYCOLOR)
