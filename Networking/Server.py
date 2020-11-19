@@ -39,6 +39,11 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         print(self.headers)
+
+        self.send_response(200)
+        self.send_header('X-Server2Client', '123')
+        self.end_headers()
+
         data = self.rfile.read(1024)
         print('Read')
         if DISPLAY:
@@ -52,9 +57,7 @@ class Handler(BaseHTTPRequestHandler):
                 File.write(data)
                 print('Written to file')
 
-        self.send_response(200)
-        self.send_header('X-Server2Client', '123')
-        self.end_headers()
+
         self.wfile.write(
                 bytes(json.dumps({"foo": "bar"}), encoding='utf8'))
 
