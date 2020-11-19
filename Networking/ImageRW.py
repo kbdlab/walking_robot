@@ -7,11 +7,15 @@ import numpy as np
 import cv2
 
 
-def Upload(body):
+def Upload(body, headers={}):
     conn = HTTPConnection(host)
-    conn.request('POST', '/', body=body)
+    conn.request('POST', '/', body=body, headers=headers)
     res = conn.getresponse()
+    print(res.getheaders())
+    print(res.getheader('X-Server2Client', 'Fallback'))
+    print(res.read())
     print('Uploaded to', host, 'with status', res.status)
+
 
 def DownloadAndUpload():
     with open(file, 'wb') as File:
@@ -24,6 +28,7 @@ def DownloadAndUpload():
     with open(file, 'rb') as File:
         Upload(File.read())
 
+
 def UploadNumpy():
     img = 255 * np.random.random((100, 100,3))
     print('shape', img.shape)
@@ -31,6 +36,7 @@ def UploadNumpy():
     if not result:
         raise Exception('Image encode error')
     Upload(img.tobytes())
+
 
 if __name__ == '__main__':
     #DownloadAndUpload()

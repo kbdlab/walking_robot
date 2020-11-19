@@ -38,10 +38,9 @@ class Handler(BaseHTTPRequestHandler):
 
 
     def do_POST(self):
-        self.send_response(204)
-        self.end_headers()
-        data = self.rfile.read()
-        
+        print(self.headers)
+        data = self.rfile.read(1024)
+        print('Read')
         if DISPLAY:
             data = np.asarray(bytearray(data), dtype="uint8")
             img = cv2.imdecode(data, cv2.IMREAD_ANYCOLOR)
@@ -49,9 +48,15 @@ class Handler(BaseHTTPRequestHandler):
             cv2.waitKey(1)
 
         else:
-            with open('steveholt-uploaded.jpg', 'wb') as File:
+            with open('uploaded.jpg', 'wb') as File:
                 File.write(data)
                 print('Written to file')
+
+        self.send_response(200)
+        self.send_header('X-Server2Client', '123')
+        self.end_headers()
+        self.wfile.write(
+                bytes(json.dumps({"foo": "bar"}), encoding='utf8'))
 
 
 

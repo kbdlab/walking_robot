@@ -32,8 +32,6 @@ def main():
         res = conn.getresponse()
         while True:
             chunk = res.readlines()
-            str(chunk).split('\n')
-            ['a' 'b' 'c' 'd']
             if (chunk == b'\n'): continue
             if (not chunk): break
 
