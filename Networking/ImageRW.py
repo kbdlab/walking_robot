@@ -24,13 +24,14 @@ def DownloadAndUpload():
     with open(file, 'rb') as File:
         Upload(File.read())
 
-
-def Upload():
-    img = np.random.rand(100, 100, 3)
+def UploadNumpy():
+    img = np.random.random((100, 100,3))
+    print('shape', img.shape)
     result, img = cv2.imencode('.jpg', img, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
     if not result:
         raise Exception('Image encode error')
-    Upload(img)
+    Upload(img.tobytes())
 
 if __name__ == '__main__':
+    #DownloadAndUpload()
     UploadNumpy()

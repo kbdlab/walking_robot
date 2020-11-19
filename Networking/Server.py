@@ -5,10 +5,15 @@ import socketserver
 import json
 from readchar import readkey
 from sys import argv
+from os import environ
+
+import numpy as np
+import cv2
 
 from Time import Time
 
 httpd = None
+DISPLAY = 'DISPLAY' in environ
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -31,11 +36,22 @@ class Handler(BaseHTTPRequestHandler):
         self.finish()
         httpd.shutdown()
 
+
     def do_POST(self):
         self.send_response(204)
         self.end_headers()
-        with open('steveholt-uploaded.jpg', 'wb') as File:
-            File.write(self.rfile.read())
+        data = self.rfile.read()
+
+        if DISPLAY:
+            data = np.asarray(bytearray(data), dtype="uint8")
+            img = cv2.imdecode(data, cv2.IMREAD_ANYCOLOR)
+            cv2.imshow('image', img)
+            cv2.waitKey(1)
+
+        else:
+            with open('steveholt-uploaded.jpg', 'wb') as File:
+                File.write(data)
+                print('Written to file')
 
 
 

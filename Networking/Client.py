@@ -31,7 +31,9 @@ def main():
         print('Connected')
         res = conn.getresponse()
         while True:
-            chunk = res.readline()
+            chunk = res.readlines()
+            str(chunk).split('\n')
+            ['a' 'b' 'c' 'd']
             if (chunk == b'\n'): continue
             if (not chunk): break
 
