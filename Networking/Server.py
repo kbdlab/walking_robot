@@ -48,6 +48,7 @@ class Handler(BaseHTTPRequestHandler):
         if DISPLAY:
             data = np.asarray(bytearray(data), dtype="uint8")
             img = cv2.imdecode(data, cv2.IMREAD_ANYCOLOR)
+            #Marker
             cv2.imshow('image', img)
             cv2.waitKey(1)
 

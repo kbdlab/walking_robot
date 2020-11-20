@@ -16,6 +16,7 @@ def Upload(body, headers={}):
     print(res.read())
     print('Uploaded to', host, 'with status', res.status)
 
+
 def Download():
     with open(file, 'wb') as File:
         conn = HTTPConnection('www.mixedcontentexamples.com')
@@ -23,6 +24,7 @@ def Download():
         res = conn.getresponse()
         File.write(res.read())
         print('Downloaded to', file)
+
 
 def DownloadAndUpload():
     Download()
@@ -44,5 +46,5 @@ def UploadNumpy():
 
 if __name__ == '__main__':
     #Download()
-    DownloadAndUpload()
-    #UploadNumpy()
+    #DownloadAndUpload()
+    UploadNumpy()
