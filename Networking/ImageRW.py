@@ -1,6 +1,6 @@
 # https://www.mixedcontentexamples.com
 file = 'steveholt.jpg'
-host = 'localhost:8001'
+host = 'localhost:8000'
 
 from http.client import HTTPConnection
 import numpy as np
@@ -16,8 +16,7 @@ def Upload(body, headers={}):
     print(res.read())
     print('Uploaded to', host, 'with status', res.status)
 
-
-def DownloadAndUpload():
+def Download():
     with open(file, 'wb') as File:
         conn = HTTPConnection('www.mixedcontentexamples.com')
         conn.request("GET", "/Content/Test/steveholt.jpg")
@@ -25,6 +24,8 @@ def DownloadAndUpload():
         File.write(res.read())
         print('Downloaded to', file)
 
+def DownloadAndUpload():
+    Download()
     with open(file, 'rb') as File:
         Upload(File.read())
 
@@ -35,9 +36,13 @@ def UploadNumpy():
     result, img = cv2.imencode('.jpg', img, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
     if not result:
         raise Exception('Image encode error')
-    Upload(img.tobytes(), {"X-Client2Server":"123"})
+
+    Upload(img.tobytes(), {
+        "X-Client2Server" : "123"
+    })
 
 
 if __name__ == '__main__':
-    #DownloadAndUpload()
-    UploadNumpy()
+    #Download()
+    DownloadAndUpload()
+    #UploadNumpy()

@@ -1,4 +1,4 @@
-PORT = 8001
+PORT = 8000
 
 from http.server import BaseHTTPRequestHandler
 import socketserver
@@ -38,13 +38,13 @@ class Handler(BaseHTTPRequestHandler):
 
 
     def do_POST(self):
-        #print(self.headers)
+        print(self.headers['X-Client2Server'])
 
         self.send_response(200)
         self.send_header('X-Server2Client', '123')
         self.end_headers()
 
-        data = self.rfile.read(int(self.headers.get('Content-Length')))
+        data = self.rfile.read(int(self.headers['Content-Length']))
         if DISPLAY:
             data = np.asarray(bytearray(data), dtype="uint8")
             img = cv2.imdecode(data, cv2.IMREAD_ANYCOLOR)
