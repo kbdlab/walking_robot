@@ -1,0 +1,2 @@
+/home/admin/walking_robot/06_cascade/positive/v1.0662.png
+/home/admin/walking_robot/06_cascade/positive/v1.7748.png
