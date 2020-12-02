@@ -17,7 +17,7 @@ try:
             break
         elif c != -1:
             print(c)
-        
+
         # Do more things
 
 finally:

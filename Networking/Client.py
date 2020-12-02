@@ -10,16 +10,24 @@ from sys import argv
 
 print(argv)
 
-HALF=.5
+HALF = .5
 MOTOR_SPEEDS = {
-    "q": (HALF, 1), "w": (1, 1), "e": (1, HALF),
-    "a": (-1, 1), "s": (0, 0), "d": (1, -1),
-    "z": (-HALF, -1), "x": (-1, -1), "c": (1, HALF),
+    "q": (HALF, 1),
+    "w": (1, 1),
+    "e": (1, HALF),
+    "a": (-1, 1),
+    "s": (0, 0),
+    "d": (1, -1),
+    "z": (-HALF, -1),
+    "x": (-1, -1),
+    "c": (1, HALF),
 }
+
 
 def main():
     while True:
-        conn = HTTPConnection(f"{argv[1] if len(argv) > 1 else  'localhost'}:{PORT}")
+        conn = HTTPConnection(
+            f"{argv[1] if len(argv) > 1 else  'localhost'}:{PORT}")
 
         try:
             conn.request("GET", "/")

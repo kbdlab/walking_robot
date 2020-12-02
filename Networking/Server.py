@@ -15,10 +15,11 @@ from Time import Time
 httpd = None
 DISPLAY = 'DISPLAY' in environ
 
+
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
-        self.send_header('Content-type','application/json')
+        self.send_header('Content-type', 'application/json')
         self.end_headers()
 
         print("Write to stdin")
@@ -29,13 +30,11 @@ class Handler(BaseHTTPRequestHandler):
 
             data = {"action": key}
             print(Time(), 'Sending', data)
-            self.wfile.write(
-                bytes(json.dumps(data), encoding='utf8'))
+            self.wfile.write(bytes(json.dumps(data), encoding='utf8'))
             self.wfile.write(b'\n')
 
         self.finish()
         httpd.shutdown()
-
 
     def do_POST(self):
         print(self.headers['X-Client2Server'])
@@ -57,9 +56,7 @@ class Handler(BaseHTTPRequestHandler):
                 File.write(data)
                 print('Written to file')
 
-        self.wfile.write(
-                bytes(json.dumps({"foo": "bar"}), encoding='utf8'))
-
+        self.wfile.write(bytes(json.dumps({"foo": "bar"}), encoding='utf8'))
 
 
 with socketserver.TCPServer(("0.0.0.0", PORT), Handler) as _httpd:
