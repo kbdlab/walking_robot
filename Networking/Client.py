@@ -39,7 +39,7 @@ def main():
         print('Connected')
         res = conn.getresponse()
         while True:
-            chunk = res.readlines()
+            chunk = res.readline()
             if (chunk == b'\n'): continue
             if (not chunk): break
 
