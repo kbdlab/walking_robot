@@ -1,14 +1,9 @@
-PORT = 8000
-
 from http.client import HTTPConnection
 import json
 from time import sleep
 import numpy as np
 
-from Time import Time
-from sys import argv
-
-print(argv)
+from utils import SERVER, Time
 
 HALF = .5
 MOTOR_SPEEDS = {
@@ -26,8 +21,7 @@ MOTOR_SPEEDS = {
 
 def main():
     while True:
-        conn = HTTPConnection(
-            f"{argv[1] if len(argv) > 1 else  'localhost'}:{PORT}")
+        conn = HTTPConnection(SERVER)
 
         try:
             conn.request("GET", "/")

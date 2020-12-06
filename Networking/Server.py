@@ -1,5 +1,3 @@
-PORT = 8000
-
 from http.server import BaseHTTPRequestHandler
 import socketserver
 import json
@@ -10,13 +8,14 @@ from os import environ
 import numpy as np
 import cv2
 
-from Time import Time
+from utils import Time, PORT
 
-httpd = None
 DISPLAY = 'DISPLAY' in environ
 
 
 class Handler(BaseHTTPRequestHandler):
+    server = None
+
     def do_GET(self):
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
@@ -26,15 +25,14 @@ class Handler(BaseHTTPRequestHandler):
         while True:
             key = readkey()
             if key == '\x03':
+                self.finish()
+                self.server.shutdown()
                 break
 
             data = {"action": key}
             print(Time(), 'Sending', data)
             self.wfile.write(bytes(json.dumps(data), encoding='utf8'))
             self.wfile.write(b'\n')
-
-        self.finish()
-        httpd.shutdown()
 
     def do_POST(self):
         print(self.headers['X-Client2Server'])
@@ -44,22 +42,37 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
         data = self.rfile.read(int(self.headers['Content-Length']))
+        img = np.asarray(bytearray(data), dtype="uint8")
+        img = cv2.imdecode(img, cv2.IMREAD_ANYCOLOR)
+
+        # Use img as an input of your autonomous driving code
+
         if DISPLAY:
-            data = np.asarray(bytearray(data), dtype="uint8")
-            img = cv2.imdecode(data, cv2.IMREAD_ANYCOLOR)
-            #Marker
-            cv2.imshow('image', img)
-            cv2.waitKey(1)
+            try:
+                cv2.imshow('image', img)
+                cv2.waitKey(1)
+            except Exception as error:
+                DISPLAY = False
+                print(
+                    'Following exception has been raised in imshow. Reverting to saving to a file'
+                )
+                print(error)
 
         else:
             with open('uploaded.jpg', 'wb') as File:
                 File.write(data)
-                print('Written to file')
+                print('Image has been written to file')
 
         self.wfile.write(bytes(json.dumps({"foo": "bar"}), encoding='utf8'))
 
 
-with socketserver.TCPServer(("0.0.0.0", PORT), Handler) as _httpd:
-    httpd = _httpd
-    print("HTTPServer Serving at port", PORT)
-    httpd.serve_forever()
+if __name__ == '__main__':
+    with socketserver.TCPServer(("0.0.0.0", PORT),
+                                Handler,
+                                bind_and_activate=False) as httpd:
+        httpd.server = httpd
+        httpd.allow_reuse_address = True
+        httpd.server_bind()
+        httpd.server_activate()
+        print("HTTPServer Serving at port", PORT)
+        httpd.serve_forever()
